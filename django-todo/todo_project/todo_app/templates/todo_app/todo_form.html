@@ -1,0 +1,33 @@
+{% extends "todo_app/base.html" %}
+{% block content %}
+<h2>{{ view.__class__.__name__|slice:0: -4 }} TODO</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  <div class="mb-3">
+    {{ form.title.label_tag }}<br>
+    {{ form.title }}
+    {% for error in form.title.errors %}<div class="text-danger">{{ error }}</div>{% endfor %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.description.label_tag }}<br>
+    {{ form.description }}
+    {% for error in form.description.errors %}<div class="text-danger">{{ error }}</div>{% endfor %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.due_date.label_tag }}<br>
+    {{ form.due_date }}
+    {% for error in form.due_date.errors %}<div class="text-danger">{{ error }}</div>{% endfor %}
+  </div>
+
+  <div class="mb-3 form-check">
+    {{ form.is_completed }} {{ form.is_completed.label_tag }}
+  </div>
+
+  <button class="btn btn-primary" type="submit">Save</button>
+  <a class="btn btn-secondary" href="{% url 'home' %}">Cancel</a>
+</form>
+{% endblock %}

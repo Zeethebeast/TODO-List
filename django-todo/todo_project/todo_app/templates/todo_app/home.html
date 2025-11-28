@@ -1,0 +1,41 @@
+{% extends "todo_app/base.html" %}
+{% block content %}
+<h1 class="mb-3">Your TODOs</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Due</th>
+      <th>Completed</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for todo in todos %}
+    <tr class="{% if todo.is_completed %}table-success{% endif %}">
+      <td><a href="{% url 'todo_detail' todo.pk %}">{{ todo.title }}</a></td>
+      <td>{% if todo.due_date %}{{ todo.due_date }}{% else %}—{% endif %}</td>
+      <td>
+        {% if todo.is_completed %}
+          Yes
+        {% else %}
+          No
+        {% endif %}
+      </td>
+      <td>
+        <a class="btn btn-sm btn-outline-primary" href="{% url 'todo_edit' todo.pk %}">Edit</a>
+        <a class="btn btn-sm btn-outline-danger" href="{% url 'todo_delete' todo.pk %}">Delete</a>
+        <a class="btn btn-sm btn-outline-secondary" href="{% url 'todo_toggle' todo.pk %}">
+          {% if todo.is_completed %}Mark unresolved{% else %}Mark complete{% endif %}
+        </a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4">No todos yet — <a href="{% url 'todo_add' %}">Add one</a>.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

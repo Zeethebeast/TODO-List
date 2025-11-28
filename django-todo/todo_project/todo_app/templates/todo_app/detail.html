@@ -1,0 +1,13 @@
+{% extends "todo_app/base.html" %}
+{% block content %}
+<h2>{{ todo.title }}</h2>
+<p><strong>Due:</strong> {% if todo.due_date %}{{ todo.due_date }}{% else %}—{% endif %}</p>
+<p><strong>Completed:</strong> {% if todo.is_completed %}Yes{% else %}No{% endif %}</p>
+<p>{{ todo.description|linebreaks }}</p>
+
+<a class="btn btn-primary" href="{% url 'todo_edit' todo.pk %}">Edit</a>
+<a class="btn btn-outline-secondary" href="{% url 'todo_toggle' todo.pk %}">
+  {% if todo.is_completed %}Mark unresolved{% else %}Mark complete{% endif %}
+</a>
+<a class="btn btn-secondary" href="{% url 'home' %}">Back</a>
+{% endblock %}
