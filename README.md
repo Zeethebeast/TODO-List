@@ -1,7 +1,4 @@
-Here is a **clean, professional, and complete README.md** for your Django TODO App.
-It includes: setup steps, features, folder structure, API/URL explanation, screenshots section, and contribution guidelines.
 
-You can copy and paste it directly into your project.
 
 ---
 
